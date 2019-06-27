@@ -13,11 +13,11 @@ public class Vote {
     @JoinColumn(name = "option_id")
     private Option option;
 
-    public Vote() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "poll_id")
+    private Poll poll;
 
-    public Vote(Option option) {
-        this.option = option;
+    public Vote() {
     }
 
     public Long getId() {
@@ -28,18 +28,22 @@ public class Vote {
         return option;
     }
 
+    public Poll getPoll() {
+        return poll;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vote vote = (Vote) o;
-        return Objects.equals(getId(), vote.getId()) &&
-                Objects.equals(getOption(), vote.getOption());
+        return Objects.equals(id, vote.id) &&
+                Objects.equals(option, vote.option) &&
+                Objects.equals(poll, vote.poll);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getId(), getOption());
+        return Objects.hash(id, option, poll);
     }
 }

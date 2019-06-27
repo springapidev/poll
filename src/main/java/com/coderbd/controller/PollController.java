@@ -11,17 +11,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/poll/")
 public class PollController {
     @Autowired
     private PollService service;
 
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/polls")
     public ResponseEntity<Iterable<Poll>> getAllPolls() {
         return new ResponseEntity<>(this.service.findAllPolls(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/polls")
     public ResponseEntity<?> createPoll(@RequestBody Poll poll) {
         poll = this.service.saveOrUpdate(poll);
         // Set the location header for the newly created resourc
@@ -34,20 +33,20 @@ public class PollController {
         httpHeaders.setLocation(serveletUri);
         return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
     }
-    @GetMapping(value = "find/{id}")
-    public ResponseEntity<?> getPollById(@PathVariable("id") Long id){
-        Poll poll = this.service.getById(id);
+    @GetMapping(value = "/polls/{pollId}")
+    public ResponseEntity<?> getPollById(@PathVariable Long pollId){
+        Poll poll = this.service.getById(pollId);
         return new ResponseEntity<>(poll,HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "delete/{id}")
-    public ResponseEntity<?> deletePoll(@PathVariable("id") Long id){
-        this.service.delete(id);
+    @DeleteMapping(value = "/polls/{pollId}")
+    public ResponseEntity<?> deletePoll(@PathVariable Long pollId){
+        this.service.delete(pollId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PostMapping(value = "update/{id}")
-    public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable("id") Long id){
-        poll.setId(id);
+    @PostMapping(value = "/polls/{pollId}")
+    public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId){
+        poll.setId(pollId);
         Poll poll1 = this.service.saveOrUpdate(poll);
         HttpHeaders httpHeaders = new HttpHeaders();
         URI uri = ServletUriComponentsBuilder
