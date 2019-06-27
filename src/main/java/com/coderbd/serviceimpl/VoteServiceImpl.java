@@ -33,4 +33,11 @@ this.repo.deleteById(id);
         poll.setId(pollId);
         return this.repo.findAllByPoll(poll);
     }
+
+    @Override
+    public Long countAllByPoll(Long pollId) {
+        Poll poll = new Poll();
+        poll.setId(pollId);
+        return this.repo.countAllByPoll(poll);
+    }
 }

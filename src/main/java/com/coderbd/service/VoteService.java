@@ -1,6 +1,7 @@
 package com.coderbd.service;
 
 
+import com.coderbd.entity.Poll;
 import com.coderbd.entity.Vote;
 
 public interface VoteService {
@@ -8,5 +9,7 @@ public interface VoteService {
     void delete(Long id);
     Vote getById(Long id);
     Iterable<Vote> findAllVotes(Long pollId);
+    Long countAllByPoll(Long pollId);
+
 
 }

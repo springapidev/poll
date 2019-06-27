@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VoteRepo extends JpaRepository<Vote,Long> {
 public Iterable<Vote> findAllByPoll(Poll poll);
+Long countAllByPoll(Poll poll);
 }
