@@ -1,5 +1,6 @@
 package com.coderbd.controller;
 
+import com.coderbd.entity.Poll;
 import com.coderbd.entity.Vote;
 import com.coderbd.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class VoteController {
 
     @PostMapping(value = "/polls/{pollId}/votes")
     public ResponseEntity<?> createVote(@PathVariable Long pollId, @RequestBody Vote vote){
+        vote.setPoll(new Poll(pollId));
         this.service.saveOrUpdate(vote);
         HttpHeaders responseHeader = new HttpHeaders();
         URI uri = ServletUriComponentsBuilder

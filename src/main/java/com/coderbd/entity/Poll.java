@@ -1,6 +1,7 @@
 package com.coderbd.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,9 +15,13 @@ public class Poll {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "option_id")
     @OrderBy
+    @Size(min = 2,max = 8)
     private Set<Option> options;
 
     public Poll() {
+    }
+    public Poll(Long id) {
+        this.id=id;
     }
 
     public Poll(String question, Set<Option> options) {

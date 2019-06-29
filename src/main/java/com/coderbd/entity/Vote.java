@@ -20,6 +20,7 @@ public class Vote {
     public Vote() {
     }
 
+
     public Long getId() {
         return id;
     }
@@ -30,6 +31,18 @@ public class Vote {
 
     public Poll getPoll() {
         return poll;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setOption(Option option) {
+        this.option = option;
+    }
+
+    public void setPoll(Poll poll) {
+        this.poll = poll;
     }
 
     @Override
